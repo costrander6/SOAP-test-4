@@ -1,0 +1,28 @@
+name: Run SOAP
+on:
+    workflow_dispatch:
+        inputs:
+            security_level:
+                required: true
+                type: choice
+                options:
+                - fundamental
+                - essential
+                - advanced
+
+jobs:
+    run-soap:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: costrander6/SOAP@7a34dad370e1fce18c4ca67402d39e1b91d459c0 # v6.0.4
+              with:
+                security_level: ${{ inputs.security_level }}
+                target: 'test-workflows/'
+                api_key: ${{ secrets.SOAP_API_KEY }}
+
+            - name: Read scanner output
+              run: |
+                echo actionlint; cat actionlint-out.json <(echo)
+                echo poutine; cat poutine-out.json <(echo)
+                echo frizbee; cat frizbee-out.jsonl <(echo) || true
+                echo semgrep; cat semgrep-out.json <(echo) || true
