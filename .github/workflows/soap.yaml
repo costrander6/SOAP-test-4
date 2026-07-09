@@ -14,7 +14,7 @@ jobs:
     run-soap:
         runs-on: ubuntu-latest
         steps:
-            - uses: costrander6/SOAP@7a34dad370e1fce18c4ca67402d39e1b91d459c0 # v6.0.4
+            - uses: costrander6/SOAP@67730a7ec1ef6c0349ba2648472f8667d11feadc # v6.1.0
               with:
                 security_level: ${{ inputs.security_level }}
                 target: 'test-workflows/'
